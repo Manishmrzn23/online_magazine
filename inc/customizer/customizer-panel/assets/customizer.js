@@ -43,6 +43,50 @@ jQuery(document).ready(function ($) {
         wp.customize.control('online_magazine_fluid_container_width', setupFluidLayout);
     });
 
+    wp.customize('online_magazine_common_header_typography', function (setting) {
+        var setupControlCommonTypography = function (control) {
+            var visibility = function () {
+                if (setting.get()) {
+                    control.container.removeClass('customizer-hidden');
+                } else {
+                    control.container.addClass('customizer-hidden');
+                }
+            };
+            visibility();
+            setting.bind(visibility);
+        };
+
+        var setupControlSeperateTypography = function (control) {
+            var visibility = function () {
+                if (setting.get()) {
+                    control.container.addClass('customizer-hidden');
+                } else {
+                    control.container.removeClass('customizer-hidden');
+                }
+            };
+            visibility();
+            setting.bind(visibility);
+        };
+        
+
+        wp.customize.control('online_magazine_h_typography', setupControlCommonTypography);
+        wp.customize.control('online_magazine_hh1_size', setupControlCommonTypography);
+        wp.customize.control('online_magazine_hh2_size', setupControlCommonTypography);
+        wp.customize.control('online_magazine_hh3_size', setupControlCommonTypography);
+        wp.customize.control('online_magazine_hh4_size', setupControlCommonTypography);
+        wp.customize.control('online_magazine_hh5_size', setupControlCommonTypography);
+        wp.customize.control('online_magazine_hh6_size', setupControlCommonTypography);
+        wp.customize.control('online_magazine_h_typography_seperator', setupControlCommonTypography);
+        wp.customize.control('header_typography_note', setupControlCommonTypography);
+        wp.customize.control('online_magazine_header_typography_nav', setupControlSeperateTypography);
+        wp.customize.control('online_magazine_h1_typography', setupControlSeperateTypography);
+        wp.customize.control('online_magazine_h2_typography', setupControlSeperateTypography);
+        wp.customize.control('online_magazine_h3_typography', setupControlSeperateTypography);
+        wp.customize.control('online_magazine_h4_typography', setupControlSeperateTypography);
+        wp.customize.control('online_magazine_h5_typography', setupControlSeperateTypography);
+        wp.customize.control('online_magazine_h6_typography', setupControlSeperateTypography);
+    });
+
     //Scroll to section
     $('body').on('click', '#sub-accordion-panel-online_magazine_home_panel .control-subsection .accordion-section-title', function (event) {
         var section_id = $(this).parent('.control-subsection').attr('id');
@@ -146,4 +190,6 @@ function TotalscrollToSection(section_id) {
             scrollTop: $contents.find("#" + preview_section_id).offset().top
         }, 1000);
     }
+
+   
 }

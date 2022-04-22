@@ -110,6 +110,104 @@ add_action( 'after_setup_theme', 'online_magazine_setup' );
  *
  * @global int $content_width
  */
+
+
+if (!function_exists('online_magazine_fonts_url')) :
+
+    /**
+     * Register Google fonts for Viral Mag.
+     *
+     * @since Online Magazine 1.0
+     *
+     * @return string Google fonts URL for the theme.
+     */
+    function online_magazine_fonts_url() {
+        $fonts_url = '';
+        $subsets = 'latin,latin-ext';
+        $fonts = $standard_font_family = $default_font_list = $font_family_array = $variants_array = $font_array = $google_fonts = array();
+
+        $custom_fonts = array(
+            'online_magazine_body_family' => 'Poppins',
+            'online_magazine_menu_family' => 'Poppins',
+            'online_magazine_h_family' => 'Poppins',
+            'online_magazine_page_title_family' => 'Default',
+            'online_magazine_frontpage_title_family' => 'Default',
+            'online_magazine_frontpage_block_title_family' => 'Default',
+            'online_magazine_sidebar_title_family' => 'Default'
+        );
+
+        $common_header_typography = get_theme_mod('online_magazine_common_header_typography', true);
+        if ($common_header_typography) {
+            $custom_fonts['online_magazine_h_family'] = 'Oswald';
+        } else {
+            $custom_fonts['online_magazine_h1_family'] = 'Oswald';
+            $custom_fonts['online_magazine_h2_family'] = 'Oswald';
+            $custom_fonts['online_magazine_h3_family'] = 'Oswald';
+            $custom_fonts['online_magazine_h4_family'] = 'Oswald';
+            $custom_fonts['online_magazine_h5_family'] = 'Oswald';
+            $custom_fonts['online_magazine_h6_family'] = 'Oswald';
+        }
+
+        $customizer_fonts = apply_filters('online_magazine_customizer_fonts', $custom_fonts);
+        
+        $standard_font = online_magazine_standard_font_array();
+        $google_font_list = online_magazine_google_font_array();
+        $default_font_list = online_magazine_default_font_array();
+
+        foreach ($standard_font as $key => $value) {
+            $standard_font_family[] = $value['family'];
+        }
+
+        foreach ($default_font_list as $key => $value) {
+            $default_font_family[] = $value['family'];
+        }
+
+        foreach ($customizer_fonts as $key => $value) {
+            $font_family_array[] = get_theme_mod($key, $value);
+            
+        }
+        var_dump($font_family_array);
+        $font_family_array = array_unique($font_family_array);
+        $font_family_array = array_diff($font_family_array, array_merge($standard_font_family, $default_font_family));
+
+        foreach ($font_family_array as $font_family) {
+            $font_array = online_magazine_search_key($google_font_list, 'family', $font_family);
+            $variants_array = $font_array['0']['variants'];
+            $variants_keys = array_keys($variants_array);
+            $variants = implode(',', $variants_keys);
+
+            $fonts[] = $font_family . ':' . str_replace('italic', 'i', $variants);
+        }
+        /*
+         * Translators: To add an additional character subset specific to your language,
+         * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
+         */
+        $subset = _x('no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'viral-mag');
+
+        if ('cyrillic' == $subset) {
+            $subsets .= ',cyrillic,cyrillic-ext';
+        } elseif ('greek' == $subset) {
+            $subsets .= ',greek,greek-ext';
+        } elseif ('devanagari' == $subset) {
+            $subsets .= ',devanagari';
+        } elseif ('vietnamese' == $subset) {
+            $subsets .= ',vietnamese';
+        }
+
+        if ($fonts) {
+            $fonts_url = add_query_arg(array(
+                'family' => urlencode(implode('|', $fonts)),
+                'subset' => urlencode($subsets),
+                'display' => 'swap',
+                    ), '//fonts.googleapis.com/css');
+        }
+
+        return $fonts_url;
+    }
+
+endif;
+
+
 function online_magazine_content_width() {
 	$GLOBALS['content_width'] = apply_filters( 'online_magazine_content_width', 640 );
 }

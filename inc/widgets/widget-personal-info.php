@@ -108,8 +108,7 @@ class online_magazine_personal_info extends WP_Widget {
                             $image_id = attachment_url_to_postid($image);
 
                             if ($image_id) {
-                                $image_array = wp_get_attachment_image_src($image_id, 'full');
-                            
+                              $image_array = wp_get_attachment_image_src($image_id, 'full');                   
                                 echo '<img alt="' . esc_html($title) . '" src="' . esc_url($image_array[0]) . '"/>';
                             } else {
                                 echo '<img alt="' . esc_html($title) . '" src="' . esc_url($image) . '"/>';

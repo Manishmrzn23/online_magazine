@@ -64,7 +64,10 @@
                                                 <?php the_custom_logo(); ?>
                                             <?php endif; ?>
                                         </a>
-
+                                    </div>
+                                    <div class="vm-site-title-tagline">
+                                         <h1 class="vm-site-title" rel="home"><?php bloginfo('name'); ?></a></h1>
+                                         <p class="vm-site-description" rel="home"><?php bloginfo('description'); ?></a></p>
                                     </div>
                                 </div>
                                 <div class="navigation-wrapper navigation-bar__section js-priority-nav">
