@@ -331,6 +331,11 @@ require get_template_directory() . '/inc/widgets/widget-personal-info.php';
 require get_template_directory() . '/inc/widgets/widget-fields.php';
 
 /**
+ * Header Functions
+ */
+require get_template_directory() . '/inc/header/header-functions.php';
+
+/**
  * Menu Icons
  */
 if (!class_exists('Menu_Icons')) {

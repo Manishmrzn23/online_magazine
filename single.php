@@ -78,10 +78,8 @@ get_header();
 													?>
 												</ul>
 											</div>
-
 											<?php
 											if ($tag_detail) {
-
 												$s = '';
 												$tag_url='';
 												foreach ($tag_detail as $tag) {
@@ -91,9 +89,7 @@ get_header();
 													$s = ',';
 												}
 											}	
-
 											?>
-
 											<footer class="single-footer entry-footer ">
 												<div class="entry-info flexbox flexbox--middle">
 													<div class="single-social-share">
@@ -175,8 +171,6 @@ get_header();
 		                        $prevPost = get_previous_post();
 		                        $nextPost = get_next_post();
 		                        $post_id = get_the_ID();
-
-
 		                        ?>
 
 		                        <div class="posts-navigation single-entry-section clearfix">
@@ -277,17 +271,16 @@ get_header();
 		                    		}?>
 		                    	</div>
 		                    </div>
-
 		                    <!-- Comments Section -->
-		                    <div class="comments-section single-entry-section">
-		                    	<div id="comments" class="comments-area">
-			                    		<?php 
-			                    		if (comments_open() || get_comments_number()) :
-			                    			comments_template();
-			                    		endif; ?>
-			                    	<!-- .comment-list -->
-		                   		</div>	
-		                    </div>
+	                    <div class="comments-section single-entry-section">
+	                    	<div id="comments" class="comments-area">
+		                    		<?php 
+		                    		if (comments_open() || get_comments_number()) :
+		                    			comments_template();
+		                    		endif; ?>
+		                    	<!-- .comment-list -->
+	                   		</div>	
+	                    </div>
                     </div>
 		            <!-- .atbs-main-col -->
 		            	<?php get_sidebar()?>

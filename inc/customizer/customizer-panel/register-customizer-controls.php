@@ -22,8 +22,8 @@ if (!class_exists('Online_Magazine_Register_Customizer_Controls')) {
             /** Theme Options */
             require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/general-settings.php';
             require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/typography-settings.php';
-            // require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/color-settings.php';
-            // require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/header-settings.php';
+            require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/color-settings.php';
+            require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/header-settings.php';
             require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/home-sections.php';
             require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/footer-settings.php';
             require ONLINE_MAGAZINE_CUSTOMIZER_PATH . 'customizer-panel/style-settings.php';

@@ -964,3 +964,8 @@ textarea {
 	margin-right: auto;
 	margin-bottom: 1.5em;
 }
+
+ .om-tagline-inline-logo  .header-logo {
+    display: flex;
+    align-items: center;
+}
