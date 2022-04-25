@@ -77,18 +77,25 @@ $online_magazine_footer_copyright=get_theme_mod('online_magazine_footer_copyrigh
     <nav class="navigation-bar navigation-bar--fullwidth hidden-xs hidden-sm ">
         <div class="navigation-bar__inner">
             <div class="navigation-bar__section">
-                <a href="#atbs-offcanvas-primary"
-                class="offcanvas-menu-toggle navigation-bar-btn js-atbs-offcanvas-toggle">
-                <i class="mdicon mdicon-menu icon--2x"></i>
-            </a>
-            <div class="site-logo header-logo">
-               <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <?php if ( has_custom_logo() ) : ?>
-                   <?php the_custom_logo(); ?>
-               <?php endif; ?>
-           </a>
-       </div>
-   </div>
+                    <?php 
+                    $online_magazine_enable_offcanvas = get_theme_mod('online_magazine_mh_show_offcanvas', true);
+                    if ($online_magazine_enable_offcanvas){
+                        ?>
+                        <a href="#atbs-offcanvas-primary"
+                        class="offcanvas-menu-toggle navigation-bar-btn js-atbs-offcanvas-toggle">
+                            <i class="mdicon mdicon-menu icon--2x"></i>
+                        </a>
+                    <?php
+                    }
+                    ?>
+                <div class="site-logo header-logo">
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                        <?php if ( has_custom_logo() ) : ?>
+                           <?php the_custom_logo(); ?>
+                       <?php endif; ?>
+                   </a>
+                </div>
+            </div>
 
    <div class="navigation-wrapper navigation-bar__section js-priority-nav">
     <?php
@@ -103,11 +110,18 @@ $online_magazine_footer_copyright=get_theme_mod('online_magazine_footer_copyrigh
 
 </div>
 
-<div class="navigation-bar__section lwa lwa-template-modal has-bookmark-list flexbox-wrap flexbox-center-y">
-    <button type="submit" class="navigation-bar-btn js-search-dropdown-toggle">
-        <i class="mdicon mdicon-search"></i>
-    </button>
-</div>
+    <div class="navigation-bar__section lwa lwa-template-modal has-bookmark-list flexbox-wrap flexbox-center-y">
+        <?php 
+        $online_magazine_enable_search = get_theme_mod('online_magazine_mh_show_search', true);
+        if ($online_magazine_enable_search) {
+            ?>
+            <button type="submit" class="mobile-header-btn js-search-dropdown-toggle">
+                <i class="mdicon mdicon-search"></i>
+            </button>
+            <?php
+        }
+        ?>
+    </div>
 </div><!-- .navigation-bar__inner -->
 </nav>
 </div><!-- Sticky header -->

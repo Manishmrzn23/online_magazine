@@ -46,6 +46,12 @@ function online_magazine_dynamic_styles() {
         'color' => '#444444'
     ));
 
+
+       /* =============== Site Title & Tagline Color =============== */
+    $online_magazine_title_color = get_theme_mod('online_magazine_title_color', '#333333');
+    $custom_css .= ".vm-site-title-tagline a, .vm-site-title a, .vm-site-title-tagline a:hover, .vm-site-title a:hover, .vm-site-description{color:$online_magazine_title_color}";
+
+
        /* ========== Header Typography ========== */
     $common_header_typography = get_theme_mod('online_magazine_common_header_typography', true);
 

@@ -12,6 +12,7 @@ $wp_customize->add_panel('online_magazine_header_settings_panel', array(
     'priority' => 15
 ));
 
+$wp_customize->remove_control('display_header_text');
 
 $wp_customize->get_section('title_tagline')->panel = 'online_magazine_header_settings_panel';
 $wp_customize->get_section('title_tagline')->title = esc_html__('Logo & Favicon', 'online-magazine');
@@ -350,7 +351,7 @@ $wp_customize->add_control(new online_magazine_Tab_Control($wp_customize, 'onlin
             'name' => esc_html__('Style', 'online-magazine'),
             'icon' => 'dashicons dashicons-art',
             'fields' => array(
-                'online_magazine_logo_height',
+                'online_magazine_logo_width',
                 'online_magazine_logo_padding',
                 'online_magazine_mh_header_bg',
                 'online_magazine_mh_height',                
@@ -435,181 +436,21 @@ $wp_customize->add_control(new online_magazine_Toggle_Control($wp_customize, 'on
     'label' => esc_html__('Show Offcanvas Menu', 'online-magazine')
 )));
 
-$wp_customize->add_setting('online_magazine_logo_height', array(
+$wp_customize->add_setting('online_magazine_logo_width', array(
     'sanitize_callback' => 'absint',
     'default' => 60,
     'transport' => 'postMessage'
 ));
 
-$wp_customize->add_control(new online_magazine_Range_Slider_Control($wp_customize, 'online_magazine_logo_height', array(
+$wp_customize->add_control(new online_magazine_Range_Slider_Control($wp_customize, 'online_magazine_logo_width', array(
     'section' => 'online_magazine_main_header_section',
-    'label' => esc_html__('Logo Height(px)', 'online-magazine'),
+    'label' => esc_html__('Logo width(px)', 'online-magazine'),
     'description' => esc_html__('The logo height will not increase beyond the header height. Increase the header height first. Logo will appear blur if the image size is small.', 'online-magazine'),
     'input_attrs' => array(
         'min' => 40,
         'max' => 200,
         'step' => 1
     )
-)));
-
-$wp_customize->add_setting('online_magazine_logo_padding', array(
-    'sanitize_callback' => 'absint',
-    'default' => 15,
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control(new online_magazine_Range_Slider_Control($wp_customize, 'online_magazine_logo_padding', array(
-    'section' => 'online_magazine_main_header_section',
-    'label' => esc_html__('Logo Top & Bottom Spacing(px)', 'online-magazine'),
-    'input_attrs' => array(
-        'min' => 0,
-        'max' => 100,
-        'step' => 1
-    )
-)));
-
-$wp_customize->add_setting('online_magazine_mh_header_bg_url', array(
-    'sanitize_callback' => 'esc_url_raw',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_setting('online_magazine_mh_header_bg_id', array(
-    'sanitize_callback' => 'absint',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_setting('online_magazine_mh_header_bg_repeat', array(
-    'default' => 'no-repeat',
-    'sanitize_callback' => 'sanitize_text_field',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_setting('online_magazine_mh_header_bg_size', array(
-    'default' => 'cover',
-    'sanitize_callback' => 'sanitize_text_field',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_setting('online_magazine_mh_header_bg_position', array(
-    'default' => 'center-center',
-    'sanitize_callback' => 'sanitize_text_field',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_setting('online_magazine_mh_header_bg_attach', array(
-    'default' => 'scroll',
-    'sanitize_callback' => 'sanitize_text_field',
-    'transport' => 'postMessage'
-));
-
-// Registers example_background control
-$wp_customize->add_control(new online_magazine_Background_Image_Control($wp_customize, 'online_magazine_mh_header_bg', array(
-    'label' => esc_html__('Header Background', 'online-magazine'),
-    'section' => 'online_magazine_main_header_section',
-    'settings' => array(
-        'image_url' => 'online_magazine_mh_header_bg_url',
-        'image_id' => 'online_magazine_mh_header_bg_id',
-        'repeat' => 'online_magazine_mh_header_bg_repeat', // Use false to hide the field
-        'size' => 'online_magazine_mh_header_bg_size',
-        'position' => 'online_magazine_mh_header_bg_position',
-        'attach' => 'online_magazine_mh_header_bg_attach'
-    )
-)));
-
-$wp_customize->add_setting('online_magazine_mh_height', array(
-    'sanitize_callback' => 'absint',
-    'default' => 65,
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control(new online_magazine_Range_Slider_Control($wp_customize, 'online_magazine_mh_height', array(
-    'section' => 'online_magazine_main_header_section',
-    'label' => esc_html__('Header Height', 'online-magazine'),
-    'input_attrs' => array(
-        'min' => 50,
-        'max' => 200,
-        'step' => 1
-    )
-)));
-
-$wp_customize->add_setting('online_magazine_mh_button_color', array(
-    'default' => '#000000',
-    'sanitize_callback' => 'sanitize_hex_color',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'online_magazine_mh_button_color', array(
-    'section' => 'online_magazine_main_header_section',
-    'label' => esc_html__('Buttons Color(Search, Social Icons, Offcanvas Menu)', 'online-magazine')
-)));
-
-$wp_customize->add_setting('online_magazine_mh_bg_color', array(
-    'default' => '#cf0701',
-    'sanitize_callback' => 'online_magazine_sanitize_color_alpha',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control(new online_magazine_Alpha_Color_Control($wp_customize, 'online_magazine_mh_bg_color', array(
-    'label' => esc_html__('Header Background Color', 'online-magazine'),
-    'section' => 'online_magazine_main_header_section',
-    'palette' => array(
-        '#FFFFFF',
-        '#000000',
-        '#f5245f',
-        '#1267b3',
-        '#feb600',
-        '#00C569',
-        'rgba( 255, 255, 255, 0.2 )',
-        'rgba( 0, 0, 0, 0.2 )'
-    )
-)));
-
-$wp_customize->add_setting('online_magazine_mh_bg_color_mobile', array(
-    'default' => '#cf0701',
-    'sanitize_callback' => 'sanitize_hex_color',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'online_magazine_mh_bg_color_mobile', array(
-    'section' => 'online_magazine_main_header_section',
-    'label' => esc_html__('Header Bar Background Color(Mobile)', 'online-magazine')
-)));
-
-$wp_customize->add_setting('online_magazine_mh_border_sep_start', array(
-    'sanitize_callback' => 'online_magazine_sanitize_text'
-));
-
-$wp_customize->add_control(new online_magazine_Separator_Control($wp_customize, 'online_magazine_mh_border_sep_start', array(
-    'section' => 'online_magazine_main_header_section'
-)));
-
-$wp_customize->add_setting('online_magazine_mh_border', array(
-    'default' => 'vm-no-border',
-    'sanitize_callback' => 'online_magazine_sanitize_choices',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control('online_magazine_mh_border', array(
-    'section' => 'online_magazine_main_header_section',
-    'type' => 'select',
-    'label' => esc_html__('Top and Bottom Border Settings', 'online-magazine'),
-    'choices' => array(
-        'vm-no-border' => esc_html__('Disable', 'online-magazine'),
-        'vm-top-border' => esc_html__('Enable Top Border', 'online-magazine'),
-        'vm-bottom-border' => esc_html__('Enable Bottom Border', 'online-magazine'),
-        'vm-top-bottom-border' => esc_html__('Enable Top & Bottom Border', 'online-magazine')
-    )
-));
-
-$wp_customize->add_setting('online_magazine_mh_border_color', array(
-    'default' => '#EEEEEE',
-    'sanitize_callback' => 'online_magazine_sanitize_color_alpha',
-    'transport' => 'postMessage'
-));
-
-$wp_customize->add_control(new online_magazine_Alpha_Color_Control($wp_customize, 'online_magazine_mh_border_color', array(
-    'label' => esc_html__('Border Color', 'online-magazine'),
-    'section' => 'online_magazine_main_header_section'
 )));
 
 
